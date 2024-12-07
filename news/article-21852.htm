@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-21852.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>如何在MySQL查询的DATETIME字段中添加一天？</title>
+        <meta name="description" content="借助DATE_ADD()函数，我们可以将一天添加到表的DATETIME字段中。 mysql&gt;&nbsp;Select&nbsp;StudentName,&nbsp;RegDate,&nbsp;D" />
+        <link rel="icon" href="__ADDON__/img/freewinxray/favicon.ico" type="image/x-icon"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+                        <a href="/" class="logo">Free WinXray</a>
+                        <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>如何在MySQL查询的DATETIME字段中添加一天？</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                          				  				  				<p>借助DATE_ADD()函数，我们可以将一天添加到表的DATETIME字段中。</p> <pre>mysql&gt;&nbsp;Select&nbsp;StudentName,&nbsp;RegDate,&nbsp;Date_ADD(RegDate,&nbsp;INTERVAL&nbsp;+1&nbsp;day)&nbsp;AS&nbsp;'NEXT&nbsp;DAY' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;testing&nbsp;where&nbsp;StudentName&nbsp;=&nbsp;'gaurav';  +-------------+---------------------+---------------------+ |&nbsp;StudentName&nbsp;|&nbsp;RegDate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;NEXT&nbsp;DAY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| +-------------+---------------------+---------------------+ |&nbsp;Gaurav&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;2017-10-29&nbsp;08:48:33&nbsp;|&nbsp;2017-10-30&nbsp;08:48:33&nbsp;| +-------------+---------------------+---------------------+ 1&nbsp;row&nbsp;in&nbsp;set&nbsp;(0.00&nbsp;sec)</pre> <p>以上查询将在RegDate中添加一天，其中MySQL表名为“ testing”的StudentName是Gaurav。</p> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-21391.htm">24小时宠物医院北京（北京宠物医院几点关门）</a></p>
+                                        <p>下一个：<a href="/news/article-21853.htm">想开宠物店但是没经验（开宠物店累不累）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-16-winxray-github.htm" title="「8月16日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接">「8月16日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-winxray-node-github.htm" title="「10月20日」最高速度20.5M/S，2024年WinXray每天更新免费节点订阅链接">「10月20日」最高速度20.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-5-winxray-node-github.htm" title="「8月5日」最高速度19.6M/S，2024年WinXray每天更新免费节点订阅链接">「8月5日」最高速度19.6M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-31-node-share-links.htm" title="「7月31日」最高速度23M/S，2024年WinXray每天更新免费节点订阅链接">「7月31日」最高速度23M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-winxray-github.htm" title="「10月23日」最高速度23M/S，2024年WinXray每天更新免费节点订阅链接">「10月23日」最高速度23M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe.htm" title="「11月9日」最高速度21.3M/S，2024年WinXray每天更新免费节点订阅链接">「11月9日」最高速度21.3M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-winxray-node.htm" title="「10月10日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接">「10月10日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-29-free-clash-nyanpasu.htm" title="「7月29日」最高速度23M/S，2024年Clash Nyanpasu每天更新免费节点订阅链接">「7月29日」最高速度23M/S，2024年Clash Nyanpasu每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-17-winxray-github.htm" title="「10月17日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接">「10月17日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-free-node-subscribe-links.htm" title="「9月22日」最高速度18.3M/S，2024年WinXray每天更新免费节点订阅链接">「9月22日」最高速度18.3M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
