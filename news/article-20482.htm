@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作</title>
         <meta name="description" content="翻译该文的目的是为了让读者能够更好的理解Parquet文件的写入原理 Parquet文件是最流行的列式文件格式之一，它被用在很多工具上，如Apache Hive，Spark，Presto，Flink等" />
-        <link rel="icon" href="__ADDON__/img/freewinxray/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
@@ -19,8 +19,7 @@
     <link href="__ADDON__/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
-    
-<!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -69,7 +68,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 xcblog-blog-list">
-                                          				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <p><strong>翻译该文的目的是为了让读者能够更好的理解Parquet文件的写入原理</strong><br /> Parquet文件是最流行的列式文件格式之一，它被用在很多工具上，如Apache Hive，Spark，Presto，Flink等。<br /> 对于在各种工作场景下，我们怎么深入的调优Parquet文件写入呢？（此文针对于Parquet 1.10.0，但是很多概念在以后的版本中也适用）</p> <h2><a id="Parquet_5" rel="nofollow"></a>Parquet文件格式结构</h2> <p>一个Parquet文件由一个或者多个Row Groups组成，一个Row Groups由包含每一列的数据块组成，每个数据块包含了一个或者多个page，该page中包含了列数据。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/7247c2e43647c09f8a1df93433b01ddc.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 所以，一个Row Group包含了一些行的所有列（在一个文件中是可以变的，下面会提到），对于一个Row Group，首先你看到的是一个列的内容，再者是第二列的内容，以此类推。<br /> 如果以后你需要某个Parquet文件的某一列，你需要读取所有Row Group的对应的列快，而不是所有Row Group所有内容。</p> <h2><a id="_11" rel="nofollow"></a>写一行数据</h2> <p>虽然Parquet文件是列式存储，但是这个只是部内表示，你仍需要需要一行一行的写：<code>InternalParquetRecordWriter.write(row)</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/168ae080ed2f33ee2ef2a7ec85ade46a.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 每一行会被立即切成不同的列，并分别存储到不同的内存Column存储中。最大值/最小值以及null值会被更新到对应的列中。<br /> 现在一切的存储还在内存中。</p> <h2><a id="Page_17" rel="nofollow"></a>Page</h2> <p>在写了100个数据的时候（对应100行），Parquet writer会检查这100个列值是否超过了指定的Page大小（默认是1MB）。<br /> 假如一个列的的<strong>原始</strong>数据没超过page的大小阈值，然后下一个page的大小会基于当前的实际列的大小进行调整，所以它既不是每一个列数据都检查一下，也不是每100列数据检查一下。因此Page大小不是固定的。<br /> 假如<strong>原始</strong>数据没有超过了Page大小，那么列内容就会被压缩（如果制定了压缩格式的话），并且被flush到列的Page存储中。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/5481333e42c93583d036633d56f8332a.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 每一Page包含了元数据（Page header），元数据中包含了未压缩的数据大小，值的数量，以及统计信息：在这个page中这个列的最大最小值和null值的数量。<br /> 这个时候一切也还是在内存中，但是数据现在是压缩的了。</p> <h2><a id="Row_Groupblock_size_25" rel="nofollow"></a>Row Group（block size）</h2> <p>在写了第一个100行数据到内存中以后，这个Parquet writer会检查数据的大小是否超过了pqrquet指定的Row Group大小（block size）（默认是128MB）。<br /> 这个大小包括了每一列在column存储中未压缩的数据大小（还没有被flushed到Page存储中）和每一列已经写入到Page存储中的压缩的数据大小。<br /> 假如数据大小没有超过指定的row group大小，Parquet writer将会根据平均的行大小来估算下一个row group大小，有可能是100甚至10000行，所哟row group大小限制也不是很严格。<br /> 假如数据大小超过了指定的row group大小，Parquet writer将会flush每一列column存储的数据到Page存储中，然后一列一列的将所有Page存储中数据的写到输出流中。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/5e68e7dd35bc20a037a57a1f4b2e169f.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 这是第一次数据被写到外部的流中（HadoopPositionOutputStream），这对外部组件可见，但是对终端用户不可见，例如 S3 Multipart Upload传输线程能够在后台上传数据到S3中。<br /> 注意：Row Group内容并不包含任何元数据（如统计信息，offset等），这些元数据信息会被写到footer中。</p> <h2><a id="File_Footer_34" rel="nofollow"></a>File Footer</h2> <p>当所有的row groups写到外部流中，并在关闭文件之前，Parquet writer将会在文件的末尾加上footer。<br /> Footer包含了文件的schema（列名字和对应的类型）和关于每一个row group的细节（总的大小，行数，最大最小值，每一列的null值数量）。注意这些列的统计信息是<strong>row group级别</strong>的，而不是文件级别的。<br /> 把所有的元数据写到footer中，可以让Parquet writer不需要保c存整个文件在内存中或者磁盘里，这就是为什么row group能够安全的被flushed。</p> <h2><a id="Logging_39" rel="nofollow"></a>Logging</h2> <p>你可以通过查看应用日志来看Parquet writer是怎么工作的。这里有好几个重要的info信息。<br /> 假如当前的row group大小超过了row group的阈值-–checkBlockSizeReached():</p> <pre><code>LOG.info("mem size {} &gt; {}: flushing {} records to disk.", memSize, nextRowGroupSize, recordCount);</code></pre> <p>真实的应用例子如下：</p> <pre><code>May 29, 2020 1:58:35 PM org.apache.parquet.hadoop.InternalParquetRecordWriter checkBlockSizeReached INFO: mem size 268641769 &gt; 268435456: flushing 324554 records to disk.</code></pre> <p>以上日志说明，当前的数据大小是 268,641,769 bytes，然而row group大小是268,435,456 (256 MB)，所以324,554行数据被flushed到外部流中。<br /> 当一个row group 被flushed之后，你会看到如下日志信息-flushRowGroupToStore()：</p> <pre><code>LOG.info("Flushing mem columnStore to file. allocated memory: {}", columnStore.getAllocatedSize());</code></pre> <p>注意columnStore大小包括了Page存储的大小。<br /> 真实的应用例子如下：</p> <pre><code>May 29, 2020 1:58:35 PM org.apache.parquet.hadoop.InternalParquetRecordWriter flushRowGroupToStore INFO: Flushing mem columnStore to file. allocated memory: 199496450</code></pre> <p>本文翻译自<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://cloudsqale.com/2020/05/29/how-parquet-files-are-written-row-groups-pages-required-memory-and-flush-operations/"  rel="nofollow">How Parquet Files are Written – Row Groups, Pages, Required Memory and Flush Operations</a></p> </div> 			                <div class="clearfix"></div>
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <p><strong>翻译该文的目的是为了让读者能够更好的理解Parquet文件的写入原理</strong><br /> Parquet文件是最流行的列式文件格式之一，它被用在很多工具上，如Apache Hive，Spark，Presto，Flink等。<br /> 对于在各种工作场景下，我们怎么深入的调优Parquet文件写入呢？（此文针对于Parquet 1.10.0，但是很多概念在以后的版本中也适用）</p> <h2><a id="Parquet_5" rel="nofollow"></a>Parquet文件格式结构</h2> <p>一个Parquet文件由一个或者多个Row Groups组成，一个Row Groups由包含每一列的数据块组成，每个数据块包含了一个或者多个page，该page中包含了列数据。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/7247c2e43647c09f8a1df93433b01ddc.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 所以，一个Row Group包含了一些行的所有列（在一个文件中是可以变的，下面会提到），对于一个Row Group，首先你看到的是一个列的内容，再者是第二列的内容，以此类推。<br /> 如果以后你需要某个Parquet文件的某一列，你需要读取所有Row Group的对应的列快，而不是所有Row Group所有内容。</p> <h2><a id="_11" rel="nofollow"></a>写一行数据</h2> <p>虽然Parquet文件是列式存储，但是这个只是部内表示，你仍需要需要一行一行的写：<code>InternalParquetRecordWriter.write(row)</code><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/168ae080ed2f33ee2ef2a7ec85ade46a.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 每一行会被立即切成不同的列，并分别存储到不同的内存Column存储中。最大值/最小值以及null值会被更新到对应的列中。<br /> 现在一切的存储还在内存中。</p> <h2><a id="Page_17" rel="nofollow"></a>Page</h2> <p>在写了100个数据的时候（对应100行），Parquet writer会检查这100个列值是否超过了指定的Page大小（默认是1MB）。<br /> 假如一个列的的<strong>原始</strong>数据没超过page的大小阈值，然后下一个page的大小会基于当前的实际列的大小进行调整，所以它既不是每一个列数据都检查一下，也不是每100列数据检查一下。因此Page大小不是固定的。<br /> 假如<strong>原始</strong>数据没有超过了Page大小，那么列内容就会被压缩（如果制定了压缩格式的话），并且被flush到列的Page存储中。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/5481333e42c93583d036633d56f8332a.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 每一Page包含了元数据（Page header），元数据中包含了未压缩的数据大小，值的数量，以及统计信息：在这个page中这个列的最大最小值和null值的数量。<br /> 这个时候一切也还是在内存中，但是数据现在是压缩的了。</p> <h2><a id="Row_Groupblock_size_25" rel="nofollow"></a>Row Group（block size）</h2> <p>在写了第一个100行数据到内存中以后，这个Parquet writer会检查数据的大小是否超过了pqrquet指定的Row Group大小（block size）（默认是128MB）。<br /> 这个大小包括了每一列在column存储中未压缩的数据大小（还没有被flushed到Page存储中）和每一列已经写入到Page存储中的压缩的数据大小。<br /> 假如数据大小没有超过指定的row group大小，Parquet writer将会根据平均的行大小来估算下一个row group大小，有可能是100甚至10000行，所哟row group大小限制也不是很严格。<br /> 假如数据大小超过了指定的row group大小，Parquet writer将会flush每一列column存储的数据到Page存储中，然后一列一列的将所有Page存储中数据的写到输出流中。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220901/5e68e7dd35bc20a037a57a1f4b2e169f.jpg" alt="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作"><br /> 这是第一次数据被写到外部的流中（HadoopPositionOutputStream），这对外部组件可见，但是对终端用户不可见，例如 S3 Multipart Upload传输线程能够在后台上传数据到S3中。<br /> 注意：Row Group内容并不包含任何元数据（如统计信息，offset等），这些元数据信息会被写到footer中。</p> <h2><a id="File_Footer_34" rel="nofollow"></a>File Footer</h2> <p>当所有的row groups写到外部流中，并在关闭文件之前，Parquet writer将会在文件的末尾加上footer。<br /> Footer包含了文件的schema（列名字和对应的类型）和关于每一个row group的细节（总的大小，行数，最大最小值，每一列的null值数量）。注意这些列的统计信息是<strong>row group级别</strong>的，而不是文件级别的。<br /> 把所有的元数据写到footer中，可以让Parquet writer不需要保c存整个文件在内存中或者磁盘里，这就是为什么row group能够安全的被flushed。</p> <h2><a id="Logging_39" rel="nofollow"></a>Logging</h2> <p>你可以通过查看应用日志来看Parquet writer是怎么工作的。这里有好几个重要的info信息。<br /> 假如当前的row group大小超过了row group的阈值-–checkBlockSizeReached():</p> <pre><code>LOG.info("mem size {} &gt; {}: flushing {} records to disk.", memSize, nextRowGroupSize, recordCount);</code></pre> <p>真实的应用例子如下：</p> <pre><code>May 29, 2020 1:58:35 PM org.apache.parquet.hadoop.InternalParquetRecordWriter checkBlockSizeReached INFO: mem size 268641769 &gt; 268435456: flushing 324554 records to disk.</code></pre> <p>以上日志说明，当前的数据大小是 268,641,769 bytes，然而row group大小是268,435,456 (256 MB)，所以324,554行数据被flushed到外部流中。<br /> 当一个row group 被flushed之后，你会看到如下日志信息-flushRowGroupToStore()：</p> <pre><code>LOG.info("Flushing mem columnStore to file. allocated memory: {}", columnStore.getAllocatedSize());</code></pre> <p>注意columnStore大小包括了Page存储的大小。<br /> 真实的应用例子如下：</p> <pre><code>May 29, 2020 1:58:35 PM org.apache.parquet.hadoop.InternalParquetRecordWriter flushRowGroupToStore INFO: Flushing mem columnStore to file. allocated memory: 199496450</code></pre> <p>本文翻译自<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://cloudsqale.com/2020/05/29/how-parquet-files-are-written-row-groups-pages-required-memory-and-flush-operations/"  rel="nofollow">How Parquet Files are Written – Row Groups, Pages, Required Memory and Flush Operations</a></p> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-20481.htm">Vuex大全</a></p>
                                         <p>下一个：<a href="/news/article-20936.htm">C语言数据结构之算法的时间复杂度_C 语言</a></p>
@@ -82,16 +82,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-9-13-free-node-subscribe-links.htm" title="「9月13日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接">「9月13日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-22-winxray-github.htm" title="「10月22日」最高速度18.5M/S，2024年WinXray每天更新免费节点订阅链接">「10月22日」最高速度18.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-free-subscribe-node.htm" title="「9月24日」最高速度21.2M/S，2024年WinXray每天更新免费节点订阅链接">「9月24日」最高速度21.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-20482.htm" title="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作">Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-4-winxray-node-share.htm" title="「10月4日」最高速度19.4M/S，2024年WinXray每天更新免费节点订阅链接">「10月4日」最高速度19.4M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-7-30-today-winxray-node.htm" title="「7月30日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接">「7月30日」最高速度20.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-27-free-high-speed-nodes.htm" title="「11月27日」最高速度20.8M/S，2024年WinXray每天更新免费节点订阅链接">「11月27日」最高速度20.8M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-21391.htm" title="24小时宠物医院北京（北京宠物医院几点关门）">24小时宠物医院北京（北京宠物医院几点关门）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-1-free-node-subscribe.htm" title="「10月1日」最高速度21.2M/S，2024年WinXray每天更新免费节点订阅链接">「10月1日」最高速度21.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-21389.htm" title="从同步函数 hello-world-dotnet 开始探索OpenFunction">从同步函数 hello-world-dotnet 开始探索OpenFunction</a></li>
+                        <li class="py-2"><a href="/news/article-25088.htm" title="广州宠物用品批发市场或者一条街在哪?（广州宠物用品批发市场或者一条街在哪个位置）">广州宠物用品批发市场或者一条街在哪?（广州宠物用品批发市场或者一条街在哪个位置）</a></li>
+                        <li class="py-2"><a href="/news/article-20023.htm" title="宠物粮品牌故事简介怎么写（宠物粮生产厂家排名）">宠物粮品牌故事简介怎么写（宠物粮生产厂家排名）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-node-subscribe.htm" title="「11月9日」最高速度21.3M/S，2024年WinXray每天更新免费节点订阅链接">「11月9日」最高速度21.3M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20937.htm" title="宠物粮食销售需要许可证吗（宠物粮食销售需要许可证吗知乎）">宠物粮食销售需要许可证吗（宠物粮食销售需要许可证吗知乎）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-winxray-node-github.htm" title="「11月28日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接">「11月28日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-winxray-github.htm" title="「11月20日」最高速度21.1M/S，2024年WinXray每天更新免费节点订阅链接">「11月20日」最高速度21.1M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-latest-winxray-node.htm" title="「8月10日」最高速度18.6M/S，2024年WinXray每天更新免费节点订阅链接">「8月10日」最高速度18.6M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-today-winxray-node.htm" title="「10月7日」最高速度22.8M/S，2024年WinXray每天更新免费节点订阅链接">「10月7日」最高速度22.8M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-node-subscribe.htm" title="「11月30日」最高速度22.5M/S，2024年WinXray每天更新免费节点订阅链接">「11月30日」最高速度22.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-11-winxray-node-share.htm" title="「12月11日」最高速度21.5M/S，2024年WinXray每天更新免费节点订阅链接">「12月11日」最高速度21.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -103,7 +103,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -133,6 +133,15 @@
     <footer id="footer">
         <div class="container py-4">
             <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                 Free WinXray节点订阅站 版权所有 Powered by WordPress
             </div>
         </div>
