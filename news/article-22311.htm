@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://freewinxray.github.io/news/article-22311.htm" />
@@ -8,15 +8,43 @@
     <title>Python置换操作浅析(a, b=b, a)【Python】</title>
         <meta name="description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
         <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-22311.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="Python置换操作浅析(a, b=b, a)【Python】" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/e0fdfba08104dcb2ac0acf6e21b73275.webp" />
+        <meta property="og:release_date" content="2024-12-07T10:21:20" />
+    <meta property="og:updated_time" content="2024-12-07T10:21:20" />
+        <meta property="og:description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python置换操作浅析(a, b=b, a)【Python】">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -82,16 +110,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-17-winxray-windows.htm" title="「12月17日」最高速度22.2M/S，2024年WinXray每天更新免费节点订阅链接">「12月17日」最高速度22.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-28800.htm" title="开个宠物粮加工厂需要多少钱呢视频（宠物粮食加工厂怎么起步）">开个宠物粮加工厂需要多少钱呢视频（宠物粮食加工厂怎么起步）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-25-today-winxray-node.htm" title="「8月25日」最高速度22.9M/S，2024年WinXray每天更新免费节点订阅链接">「8月25日」最高速度22.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-4-free-node-subscribe.htm" title="「8月4日」最高速度18.6M/S，2024年WinXray每天更新免费节点订阅链接">「8月4日」最高速度18.6M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-18696.htm" title="美联众合动物医院是24小时 美联众合动物医院上班时间">美联众合动物医院是24小时 美联众合动物医院上班时间</a></li>
-                        <li class="py-2"><a href="/news/article-24622.htm" title="win11系统找不到记事本如何解决">win11系统找不到记事本如何解决</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-27-node-share.htm" title="「8月27日」最高速度22.3M/S，2024年WinXray每天更新免费节点订阅链接">「8月27日」最高速度22.3M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-8-free-winxray-node.htm" title="「10月8日」最高速度22.6M/S，2024年WinXray每天更新免费节点订阅链接">「10月8日」最高速度22.6M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-21-free-high-speed-nodes.htm" title="「11月21日」最高速度21.6M/S，2024年WinXray每天更新免费节点订阅链接">「11月21日」最高速度21.6M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-17-free-winxray-node.htm" title="「9月17日」最高速度19.3M/S，2024年WinXray每天更新免费节点订阅链接">「9月17日」最高速度19.3M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-11-winxray-node-share.htm" title="「12月11日」最高速度21.5M/S，2024年WinXray每天更新免费节点订阅链接">「12月11日」最高速度21.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28336.htm" title="动物疫苗价格表图片高清大图大全 动物疫苗价格表图片高清大图大全集">动物疫苗价格表图片高清大图大全 动物疫苗价格表图片高清大图大全集</a></li>
+                        <li class="py-2"><a href="/news/article-23241.htm" title="动物疫苗的制造技术论文怎么写（动物疫苗研究进展）">动物疫苗的制造技术论文怎么写（动物疫苗研究进展）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-winxray-github.htm" title="「11月20日」最高速度21.1M/S，2024年WinXray每天更新免费节点订阅链接">「11月20日」最高速度21.1M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-30212.htm" title="狗狗领养人违约（狗狗领养后出意外需要赔偿原主人吗）">狗狗领养人违约（狗狗领养后出意外需要赔偿原主人吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-winxray-node.htm" title="「1月17日」最高速度21.9M/S，2025年WinXray每天更新免费节点订阅链接">「1月17日」最高速度21.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47266.htm" title="宠物粮食品牌都有什么名字呢 宠物粮食品牌都有什么名字呢图片">宠物粮食品牌都有什么名字呢 宠物粮食品牌都有什么名字呢图片</a></li>
+                        <li class="py-2"><a href="/news/article-27406.htm" title="动物疫苗价格排行榜最新图片及价格（动物疫苗价格排行榜最新图片及价格查询）">动物疫苗价格排行榜最新图片及价格（动物疫苗价格排行榜最新图片及价格查询）</a></li>
+                        <li class="py-2"><a href="/news/article-26937.htm" title="宠物粮品牌排名榜最新（宠物主粮品牌）">宠物粮品牌排名榜最新（宠物主粮品牌）</a></li>
+                        <li class="py-2"><a href="/news/article-37875.htm" title="厦门宠物领养中心哪家好点 厦门宠物领养中心哪家好点呢">厦门宠物领养中心哪家好点 厦门宠物领养中心哪家好点呢</a></li>
                     </ul>
     </div>
 </div>
@@ -103,25 +131,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">92</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://freewinxray.github.io/news/article-19108.htm" />
@@ -8,15 +8,43 @@
     <title>es修改字段text类型为date类型</title>
         <meta name="description" content="一、概述 首先说明es中索引的字段类型是不可修改的，只能是重新创建一个索引并设置好映射mapping，然后再将老索引的数据复制过去。 二、原索引字段text类型  三、操作步骤   创建索引，并指定映" />
         <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-19108.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="es修改字段text类型为date类型" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/8bea0557d0a3cc7d79f95a6bdc5d6b1b.webp" />
+        <meta property="og:release_date" content="2024-11-30T10:44:08" />
+    <meta property="og:updated_time" content="2024-11-30T10:44:08" />
+        <meta property="og:description" content="一、概述 首先说明es中索引的字段类型是不可修改的，只能是重新创建一个索引并设置好映射mapping，然后再将老索引的数据复制过去。 二、原索引字段text类型  三、操作步骤   创建索引，并指定映" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="es修改字段text类型为date类型">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -82,16 +110,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-1-winxray-node.htm" title="「12月1日」最高速度21M/S，2024年WinXray每天更新免费节点订阅链接">「12月1日」最高速度21M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-2-free-node-subscribe.htm" title="「12月2日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接">「12月2日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-17-winxray-github.htm" title="「10月17日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接">「10月17日」最高速度19.1M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-28-winxray-node-github.htm" title="「10月28日」最高速度22.4M/S，2024年WinXray每天更新免费节点订阅链接">「10月28日」最高速度22.4M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-12-winxray-windows.htm" title="「11月12日」最高速度19.9M/S，2024年WinXray每天更新免费节点订阅链接">「11月12日」最高速度19.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-20-today-winxray-node.htm" title="「12月20日」最高速度18.9M/S，2024年WinXray每天更新免费节点订阅链接">「12月20日」最高速度18.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-25-today-winxray-node.htm" title="「8月25日」最高速度22.9M/S，2024年WinXray每天更新免费节点订阅链接">「8月25日」最高速度22.9M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-7-today-winxray-node.htm" title="「10月7日」最高速度22.8M/S，2024年WinXray每天更新免费节点订阅链接">「10月7日」最高速度22.8M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-8-winxray-node.htm" title="「12月8日」最高速度19.8M/S，2024年WinXray每天更新免费节点订阅链接">「12月8日」最高速度19.8M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-21391.htm" title="24小时宠物医院北京（北京宠物医院几点关门）">24小时宠物医院北京（北京宠物医院几点关门）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-winxray-node-share.htm" title="「12月22日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接">「12月22日」最高速度20.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-26936.htm" title="合肥宠物救助站电话（合肥宠物救助领养中心）">合肥宠物救助站电话（合肥宠物救助领养中心）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-subscribe-node.htm" title="「12月9日」最高速度18.4M/S，2024年WinXray每天更新免费节点订阅链接">「12月9日」最高速度18.4M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28799.htm" title="这几种方法帮你快速实现回到页面顶部">这几种方法帮你快速实现回到页面顶部</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-node-subscribe.htm" title="「11月30日」最高速度22.5M/S，2024年WinXray每天更新免费节点订阅链接">「11月30日」最高速度22.5M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20482.htm" title="Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作">Parquet文件是怎么被写入的-Row Groups，Pages，需要的内存，以及flush操作</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-winxray-node-github.htm" title="「1月28日」最高速度18.5M/S，2025年WinXray每天更新免费节点订阅链接">「1月28日」最高速度18.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-34510.htm" title="kafka3.0.0启动异常">kafka3.0.0启动异常</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-4-free-node-subscribe.htm" title="「12月4日」最高速度18.2M/S，2024年WinXray每天更新免费节点订阅链接">「12月4日」最高速度18.2M/S，2024年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-winxray-node.htm" title="「1月18日」最高速度21.4M/S，2025年WinXray每天更新免费节点订阅链接">「1月18日」最高速度21.4M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -103,25 +131,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">92</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
