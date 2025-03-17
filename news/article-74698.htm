@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-74698.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spring的3级缓存和循环引用的理解_在线工具</title>
+        <meta name="description" content="此处是我自己的一个理解，防止以后忘记，如若那个地方理解不对，欢迎指出。   在我们写代码的过程中一般会使用 @Autowired 来注入另外的一个对象，但有些时候发生了 循环依赖，但是我们的代码没有报" />
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-74698.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="Spring的3级缓存和循环引用的理解_在线工具" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/2815747b4944a6f9a7d4e4718cadfa94.webp" />
+        <meta property="og:release_date" content="2025-03-16T10:26:48" />
+    <meta property="og:updated_time" content="2025-03-16T10:26:48" />
+        <meta property="og:description" content="此处是我自己的一个理解，防止以后忘记，如若那个地方理解不对，欢迎指出。   在我们写代码的过程中一般会使用 @Autowired 来注入另外的一个对象，但有些时候发生了 循环依赖，但是我们的代码没有报" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spring的3级缓存和循环引用的理解_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/">
+                        <span class="logo">Free WinXray</span>
+                        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>Spring的3级缓存和循环引用的理解_在线工具</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<blockquote> <p>此处是我自己的一个理解，防止以后忘记，如若那个地方理解不对，欢迎指出。</p> </blockquote> </h1> <p>在我们写代码的过程中一般会使用 <code>@Autowired</code> 来注入另外的一个对象，但有些时候发生了<code> 循环依赖</code>，但是我们的代码没有报错，这个是什么原因呢？</p> </h1> <h2 id="1考虑循环依赖的类型">1、考虑循环依赖的类型</h2> <p>此处我们考虑 <code>单例</code> + <code>@Autowired</code> 的循环依赖，不考虑使用<code>构造器注入</code>或<code>原型作用域的Bean</code>的注入。</p> <h2 id="2代理对象何时创建">2、代理对象何时创建</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/4f2efb146cccd30df758f97759072b97.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"><br /><strong>注意：</strong><br /> 正常情况下，即没有发生 循环依赖的时候，<code>aop增强</code>是在 bean 初始化完成之后的 <code>BeanPostProcessor#postProcessAfterInitialization</code>方法中，但是如果有循环依赖发生的话，就需要提前，在 <code>getEarlyBeanReference</code>中提前创建代理对象。</p> <h2 id="33级缓存中保存的是什么对象">3、3级缓存中保存的是什么对象</h2> <table> <thead> <tr> <th>缓存字段名</th> <th>缓存级别</th> <th>数据类型</th> <th>解释</th> </tr> </thead> <tbody> <tr> <td>singletonObjects</td> <td>1</td> <td>Map&lt;String, Object&gt;</td> <td>保存的是完整的Bean，即可以使用的Bean</td> </tr> <tr> <td>earlySingletonObjects</td> <td>2</td> <td>Map&lt;String, Object&gt;</td> <td>保存的是半成品的Bean,即属性还没有设置，没有完成初始化工作</td> </tr> <tr> <td>singletonFactories</td> <td>3</td> <td>Map&lt;String, ObjectFactory&lt;?&gt;&gt;</td> <td>主要是生成Bean，然后放到二级缓存中</td> </tr> </tbody> </table> <p><strong>注意：</strong><br /><code>ObjectFactory#getObject()</code> 每调用一次，都会产生一个新的对象或返回旧对象，取决于是否存在代理等等。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/4dbcae99ba855144b53b8240a4d82a6c.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"></p> <h2 id="4从3级缓存中获取对象">4、从3级缓存中获取对象</h2> <blockquote> <p>org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#getSingleton(java.lang.String, boolean)</p> </blockquote> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/39e95a555cf81b430f300e15e1900194.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"></p> <h2 id="5-spring-bean的简化创建过程">5 Spring Bean的简化创建过程</h2> <h3 id="1实例化一个bean">1、实例化一个bean</h3> <pre><code class="language-java">Object bean = instanceWrapper.getWrappedInstance(); </code></pre> <p>实例化Bean 即 new Bean()</p> <h3 id="2加入到三级缓存中">2、加入到三级缓存中</h3> <pre><code class="language-java">addSingletonFactory(beanName, () -&gt; getEarlyBeanReference(beanName, mbd, bean)); </code></pre> <p>加入到三级缓存中是有一些条件判断的，一般都会是成立的，此处认为需要加入到三级缓存。</p> <h3 id="3设置bean的属性">3、设置bean的属性</h3> <pre><code class="language-java">populateBean(beanName, mbd, instanceWrapper); </code></pre> <p>第一步实例化了bean，但是此时是没有填充需要注入的属性的，通过这一步进行属性的填充。</p> <h3 id="4初始化bean">4、初始化bean</h3> <pre><code class="language-java">Object exposedObject = initializeBean(beanName, exposedObject, mbd); </code></pre> <p>初始化Bean，执行初始化方法、Aware回调、执行 BeanPostProcessor#postProcessAfterInitialization 方法 (<code>aop的增强</code>是在这个里面实现的)</p> <p>如果有<code>循环引用</code>的话，则aop的增强需要提前。</p> <h3 id="5加入到一级缓存中">5、加入到一级缓存中</h3> <pre><code class="language-java">addSingleton(......) </code></pre> </h1> <pre><code class="language-java">@Component class A {     @Autowired 	private B b; }  @Transaction (存在代理) @Component class B{     @Autowired 	private A a; } </code></pre> <h2 id="1假设只有singletonobjects和earlysingletonobjects可否完成循环依赖">1、假设只有singletonObjects和earlySingletonObjects可否完成循环依赖</h2> <table> <thead> <tr> <th>缓存字段名</th> <th>缓存级别</th> <th>数据类型</th> <th>解释</th> </tr> </thead> <tbody> <tr> <td>singletonObjects</td> <td>1</td> <td>Map&lt;String, Object&gt;</td> <td>保存的是完整的Bean，即可以使用的Bean</td> </tr> <tr> <td>earlySingletonObjects</td> <td>2</td> <td>Map&lt;String, Object&gt;</td> <td>保存的是半成品的Bean,即属性还没有设置，没有完成初始化工作</td> </tr> </tbody> </table> <p>此时需要获取 <code>B</code>的实例，即 <code>getBean("b")</code>，由上方了解到的 Bean 的简化流程可知<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/3853546a0bcb2a1f9e4ed8d122b1b3e2.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/04a8ea3ecf5d146feb995c9a078bf6c2.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"><br /> 由上图可知，<code>对象存在代理时</code>，2级缓存无法解决问题。因为代理对象是通过<code>BeanPostProcessor</code>来完成，<code>是在设置属性之后才产生的代理对象</code>。</p> <p>此时可能有人会说，那如果我在构建完B的实例后，就立马进行Aop代理，这样不就解决问题了吗？那假设A和B之间没有发生循环依赖，这样设计会不会不优雅？</p> <h2 id="2假设只有singletonobjects和singletonfactories可否完成循环依赖">2、假设只有singletonObjects和singletonFactories可否完成循环依赖</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/76875e30067a8affc5fa72b2adb05fe8.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"><br /> 由图中可知也是不可以实现的。</p> <h2 id="33级缓存如何实现">3、3级缓存如何实现</h2> <h3 id="1解决代理问题">1、解决代理问题</h3> <p>因为默认情况下，代理是通过<code>BeanPostProcessor</code>来完成，为了解决代理，就需要提前创建代理，那么这个代理的创建就放到3级缓存中来进行创建。</p> <pre><code class="language-java">addSingletonFactory(beanName, () -&gt; getEarlyBeanReference(beanName, mbd, bean)); </code></pre> <p><code>getEarlyBeanReference</code> 此方法会返回代理bean</p> <h3 id="2解决单例通过第3级缓存多次获取的值不一致">2、解决单例通过第3级缓存多次获取的值不一致</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/39e95a555cf81b430f300e15e1900194.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"><br /> 从上图中可知，对象是先从 <code>一级-&gt;二级-&gt;三级缓存</code> 这样查找，当三级缓存产生了对象后就放入二级缓存中缓存起来，同时删除三级缓存。</p> <h3 id="3流程图">3、流程图</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220428/0e9f0c7f4cfa3104d594bf25274378bd.jpg" alt="Spring的3级缓存和循环引用的理解_在线工具"></p> </h1> <p>1、一级缓存 <code>singletonObjects</code> 存放可以使用的单例。<br /> 2、二级缓存<code>earlySingletonObjects</code>存放的是早期的Bean，即是半成品，此时还是不可用的。<br /> 3、三级缓存<code>singletonFactories</code> 是一个对象工厂，用于创建对象，然后放入到二级缓存中。同时对象如果有Aop代理的话，这个对对象工厂返回的就是代理对象。</p> <p>那可以在<code>earlySingletonObjects</code>中直接存放创建后的代理对象吗？这样是可以解决问题，但是设计可能就不合理了。因为在Spring中 <code>Aop</code>的代理是在对象完成之后创建的。而且如果没有发生循环依赖的话，有必要提前创建代理对象吗？分成三级缓存，代码结构更清楚，更合理。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-74033.htm">狗粮进货渠道哪里便宜（狗粮进货渠道哪里便宜点）</a></p>
+                                        <p>下一个：<a href="/news/article-74699.htm">宠物领养app申请界面在哪找（宠物领养app申请界面在哪找到）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-66227.htm" title="动物疫苗的储存（动物疫苗的储存温度）">动物疫苗的储存（动物疫苗的储存温度）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-10-winxray-node-github.htm" title="「2月10日」最高速度21.9M/S，2025年WinXray每天更新免费节点订阅链接">「2月10日」最高速度21.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41828.htm" title="MySQL数据库之数据data 基本操作_Mysql">MySQL数据库之数据data 基本操作_Mysql</a></li>
+                        <li class="py-2"><a href="/news/article-62561.htm" title="打过疫苗猫抓伤出血要***吗（打过疫苗猫抓伤出血要***吗）">打过疫苗猫抓伤出血要***吗（打过疫苗猫抓伤出血要***吗）</a></li>
+                        <li class="py-2"><a href="/news/article-65626.htm" title="兽用疫苗如何保存时间长一点（兽用疫苗保存的适宜温度）">兽用疫苗如何保存时间长一点（兽用疫苗保存的适宜温度）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-free-node-subscribe.htm" title="「1月15日」最高速度18M/S，2025年WinXray每天更新免费节点订阅链接">「1月15日」最高速度18M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-45812.htm" title="0元开网店无货源（0元开网店无货源拼多多可以吗）">0元开网店无货源（0元开网店无货源拼多多可以吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-winxray-node-github.htm" title="「1月28日」最高速度18.5M/S，2025年WinXray每天更新免费节点订阅链接">「1月28日」最高速度18.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41827.htm" title="Spring JDBC-NamedParameterJdbcTemplate模板类">Spring JDBC-NamedParameterJdbcTemplate模板类</a></li>
+                        <li class="py-2"><a href="/news/article-67496.htm" title="学宠物医生需要多少钱一个月（学宠物医生一年需要多少学费）">学宠物医生需要多少钱一个月（学宠物医生一年需要多少学费）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">83</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
