@@ -1,4 +1,4 @@
-# 「4月2日」最高速度20.6M/S，2025年WinXray每天更新免费节点订阅链接  更新时间 2025-04-02 07:56:29
+# 「4月6日」最高速度23M/S，2025年WinXray每天更新免费节点订阅链接  更新时间 2025-04-06 10:23:07
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://freewinxray.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://freewinxray.github.io/uploads/2025/04/0-20250402.yaml
-- https://freewinxray.github.io/uploads/2025/04/1-20250402.yaml
-- https://freewinxray.github.io/uploads/2025/04/2-20250402.yaml
-- https://freewinxray.github.io/uploads/2025/04/3-20250402.yaml
-- https://freewinxray.github.io/uploads/2025/04/4-20250402.yaml
+- https://freewinxray.github.io/uploads/2025/04/0-20250406.yaml
+- https://freewinxray.github.io/uploads/2025/04/1-20250406.yaml
+- https://freewinxray.github.io/uploads/2025/04/2-20250406.yaml
+- https://freewinxray.github.io/uploads/2025/04/3-20250406.yaml
+- https://freewinxray.github.io/uploads/2025/04/4-20250406.yaml
 
 ### V2ray订阅链接
 
-- https://freewinxray.github.io/uploads/2025/04/0-20250402.txt
-- https://freewinxray.github.io/uploads/2025/04/1-20250402.txt
-- https://freewinxray.github.io/uploads/2025/04/2-20250402.txt
-- https://freewinxray.github.io/uploads/2025/04/3-20250402.txt
-- https://freewinxray.github.io/uploads/2025/04/4-20250402.txt
+- https://freewinxray.github.io/uploads/2025/04/0-20250406.txt
+- https://freewinxray.github.io/uploads/2025/04/1-20250406.txt
+- https://freewinxray.github.io/uploads/2025/04/2-20250406.txt
+- https://freewinxray.github.io/uploads/2025/04/3-20250406.txt
+- https://freewinxray.github.io/uploads/2025/04/4-20250406.txt
 
 ### Sing-box订阅链接
 
-- https://freewinxray.github.io/uploads/2025/04/20250402.json
+- https://freewinxray.github.io/uploads/2025/04/20250406.json
 
 ## 更多clash节点订阅 ：
 

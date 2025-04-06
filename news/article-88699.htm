@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-88699.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JavaScript中的变量</title>
+        <meta name="description" content="变量， 是编程语言的核心，也是编程语言的灵魂。那么JavaScript中的变量是怎么回事？ 1 写在开始的废话 之前我写过一篇JavaScript中的四兄弟，介绍了JavaScript中声明变量的四种" />
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-88699.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="JavaScript中的变量" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/ffd9ddd60cf93f7cabc97ba4e743fa9c.webp" />
+        <meta property="og:release_date" content="2025-04-05T08:16:26" />
+    <meta property="og:updated_time" content="2025-04-05T08:16:26" />
+        <meta property="og:description" content="变量， 是编程语言的核心，也是编程语言的灵魂。那么JavaScript中的变量是怎么回事？ 1 写在开始的废话 之前我写过一篇JavaScript中的四兄弟，介绍了JavaScript中声明变量的四种" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JavaScript中的变量">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/">
+                        <span class="logo">Free WinXray</span>
+                        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>JavaScript中的变量</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p><code>变量， 是编程语言的核心，也是编程语言的灵魂。那么JavaScript中的变量是怎么回事？</code></p> <h3 id="1-写在开始的废话">1 写在开始的废话</h3> <p>之前我写过一篇JavaScript中的四兄弟，介绍了JavaScript中声明变量的四种方式<code>var</code>,<code>function</code>,<code>let</code>和<code>const</code>。我就知道那个时候我就挖了一个坑，这篇文章我们详细一些。</p> <h3 id="2-导言">2 导言</h3> <p>JavaScript中的变量可以在两个维度进行分类，<strong>①域， ②可变性</strong></p> <table> <thead> <tr> <th>域</th> <th>可变性</th> </tr> </thead> <tbody> <tr> <td>全局</td> <td>值可变量</td> </tr> <tr> <td>局部</td> <td>常量</td> </tr> </tbody> </table> <h3 id="21-域作用域">2.1 域（作用域）</h3> <p>什么是域？ 可访问、操作一个变量的区域（范围）。有顶层域，也叫全局域，也有局部域，局部域可在函数和{}内产生。在全局域内创建的变量就是全局变量，以此类推，在局部域内创建的变量</p> <p><strong>作用域是在定义的时候产生的</strong></p> <pre><code class="language-javascript"> var name = 'jianyanzhi';   function say() {     var name = 'jianyanzhi-say';     console.log(name);     name = 'say-end-name';     console.log('say-end-name:', name);  }  say();  console.log(name);</code></pre> <p>上面这段代码哪些是全局变量哪些是局部变量呢？我们来分析一下。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/2c433929920157695ec77a0063942f3a.jpg" alt="JavaScript中的变量"></p> <p>图中，红框的部分就是全局域，在全局域中，我们创建了<code>name</code>和<code>say</code>两个变量。再缩小范围，绿框的部分就是由函数<code>say</code>创建的局部域，在<code>say</code>中只创建了<code>name</code>这个变量，所以绿色下划线的<code>name</code>变量就是局部变量。而函数<code>say</code>中第三行又把<code>name</code>这个变量重新赋值，此时操作的是局部变量。</p> <pre><code class="language-javascript"> var allowVar = 'jianyanzhi', allow = true;  if (allow) {      function allowFunction () {          console.log('allow-say')      }      let allowLet = 'allowLet';      const allowConst = 'allowConst';      var allowVar = 'allowVar';      console.log('allow', allowFunction);      console.log('allow', allowLet);      console.log('allow', allowConst);      console.log('allow', allowVar);  } console.log('global', allowFunction); console.log('global', allowVar); console.log('global', allowLet); console.log('global', allowConst);</code></pre> <p>同样的问题，哪些是局部变量，哪些又是全局变量？我们来分析下；</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/31b5ad8c40633243f3df7e9feb811d96.jpg" alt="JavaScript中的变量"></p> <p>代码执行的结果是什么？</p> <pre><code class="language-javascript">allow "function allowFunction () {console.log('allow-say')}" allow "allowLet" allow "allowConst" allow "allowVar" global "function allowFunction () {console.log('allow-say')}" global "allowVar" ReferenceError allowConst is not defined // global "allowConst" ReferenceError allowLet is not defined //  global "allowLet"</code></pre> <p>为什么会产生这样的结果？</p> <ol> <li><code>if</code>条件语句中由<code>var</code>和<code>function</code>创建的变量，会自动归到<code>if</code>语句所属的域中 因此我们看到global的输出中，<code>var</code>和<code>function</code>的输出和allow的输出是一致的。不只是<code>if</code>语句，还有单纯的{}也是,比如<code>{ var a = 1; function aFn() {} }</code>;</li> <li><code>var</code>和<code>function</code>创建局部变量的时候，只能在<code>function</code>中创建有效，<code>var</code>是无法在{}块级作用域中创建局部变量的;</li> <li><code>let</code>和<code>const</code>创建的变量则属于声明时所在的域,包括函数和{}。</li> </ol> <p><strong>全局变量和局部变量的使用</strong></p> <ol> <li> <p>全局变量作为持久性变量使用，全程有效，而不是拿来存储某个临时的值，谨慎修改</p> </li> <li> <p>全局变量和局部变量存在同名的情况下，根据就近原则，优先使用局部变量，要防止污染全局变量</p> </li> </ol> <h3 id="22-可变性">2.2 可变性</h3> <p>根据值的可变性来分类，可变的是变量，不可变的是常量。变量可后续随意更改，值是动态的，而常量一旦确定则无法修改，值是恒定、静态的。</p> <pre><code class="language-javascript">var date = '2022-01-01'; const codeLang = 'JavaScript'; const articleData = { title: 'JavaScript中的变量', author: '简言之' };  date = '2022-04-04'; // success  codeLang = 'Java'; // TypeError: Assignment to constant variable  articleData = { title: 'haha', author: '简言之' } // TypeError: Assignment to constant variable articleData['title'] = 'haha';  // success</code></pre> <p>创建了两个常量和一个变量。变量<code>date</code>后续可以随意更改，更改有效。<br /> 常量就无法更改了，<code>codeLang</code>和<code>articleData</code>在修改的时候抛出了类型错误。表示它们都是常量，无法更改。可为什么后面把<code>title</code>改为<code>haha</code>的时候就更改成功了？因为<strong>常量保存的是变量的值，这个值可以是一个普通值也可以是一个内存地址值，只要确保这个值是恒定的，其他由你使劲造</strong>。</p> <p><strong>变量与常量的使用</strong></p> <ol> <li> <p>根据编码逻辑来适当使用常量，虽然变量可满足所有要求，但是合适使用常量可以增强代码的语义性</p> </li> <li> <p>上述案例中的<code>articleData</code>通过访问属性并修改值这种方式谨慎使用，修改的属性过多时，还是键值对合并之后保存到一个新常量中较为妥当</p> </li> </ol> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-87986.htm">广州领养宠物的地方是哪里（广州有领养宠物猫的地方吗?）</a></p>
+                                        <p>下一个：<a href="/news/article-88700.htm">动物医院实践心得5000字怎么写（动物医院实务的教学内容有那些?）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-66864.htm" title="基于Apache Hudi和Debezium构建CDC入湖管道">基于Apache Hudi和Debezium构建CDC入湖管道</a></li>
+                        <li class="py-2"><a href="/news/article-87250.htm" title="k8s 部署Redis集群">k8s 部署Redis集群</a></li>
+                        <li class="py-2"><a href="/news/article-68130.htm" title="动物疫苗和人体疫苗生产有什么区别呢视频（动物疫苗的概念）">动物疫苗和人体疫苗生产有什么区别呢视频（动物疫苗的概念）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-5-today-winxray-node.htm" title="「4月5日」最高速度20.1M/S，2025年WinXray每天更新免费节点订阅链接">「4月5日」最高速度20.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-89440.htm" title="宠物店一个猫咪多少钱 宠物店一个猫咪多少钱啊">宠物店一个猫咪多少钱 宠物店一个猫咪多少钱啊</a></li>
+                        <li class="py-2"><a href="/news/article-75373.htm" title="安安宠医价目表（安安宠医总部电话）">安安宠医价目表（安安宠医总部电话）</a></li>
+                        <li class="py-2"><a href="/news/article-78798.htm" title="02-SpringMVC @RequestMapping注解">02-SpringMVC @RequestMapping注解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-6-winxray-windows.htm" title="「3月6日」最高速度20.6M/S，2025年WinXray每天更新免费节点订阅链接">「3月6日」最高速度20.6M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-65626.htm" title="兽用疫苗如何保存时间长一点（兽用疫苗保存的适宜温度）">兽用疫苗如何保存时间长一点（兽用疫苗保存的适宜温度）</a></li>
+                        <li class="py-2"><a href="/news/article-80153.htm" title="被猫抓伤怎么观察是否生病（被猫抓了怎么观察有没有感染到?）">被猫抓伤怎么观察是否生病（被猫抓了怎么观察有没有感染到?）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
