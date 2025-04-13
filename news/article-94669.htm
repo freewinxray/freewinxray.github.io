@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-94669.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>k8s入门之pod</title>
+        <meta name="description" content="pod是k8s项目中的最小编排单位，它是运行中的一组（一个或多个）容器，这些容器共享存储、网络、调度等资源，pod是一个逻辑概念，同一个名称空间下不同pod可以通过ip互相访问。  一、通过命令行方式" />
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-94669.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="k8s入门之pod" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/19e6c0aacc9345201f299c2b2db03d47.webp" />
+        <meta property="og:release_date" content="2025-04-13T07:17:54" />
+    <meta property="og:updated_time" content="2025-04-13T07:17:54" />
+        <meta property="og:description" content="pod是k8s项目中的最小编排单位，它是运行中的一组（一个或多个）容器，这些容器共享存储、网络、调度等资源，pod是一个逻辑概念，同一个名称空间下不同pod可以通过ip互相访问。  一、通过命令行方式" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="k8s入门之pod">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/">
+                        <span class="logo">Free WinXray</span>
+                        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>k8s入门之pod</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>pod是k8s项目中的最小编排单位，它是运行中的一组（一个或多个）容器，这些容器共享存储、网络、调度等资源，pod是一个逻辑概念，同一个名称空间下不同pod可以通过ip互相访问。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/12f620c24820761e06e5f5981dcc6fc7.jpg" alt="k8s入门之pod"></p> <p><strong>一、通过命令行方式管理</strong></p> <p><strong>1.创建</strong></p> <p>在dev名称空间下创建名称为mynginx的pod，如果不指定-n参数，则默认创建在default名称空间下</p> <pre><code>kubectl run mynginx --image=nginx -n dev</code></pre> <p><strong>2.查看dev名称空间下所有pod的简单信息</strong></p> <pre><code>kubectl get pod -n dev</code></pre> <p>创建pod需要时间，尤其是节点上没有该镜像时，还需要下载镜像，可以看到pod的Status状态会随着时间而改变，最后变成Running表示pod启动成功<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c369b50f42a191447676cd2aaf73e99d.jpg" alt="k8s入门之pod"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/5b5e3d1e9ff3511bfeb1ed24d146ebbc.jpg" alt="k8s入门之pod"></p> <p><strong>3.查看dev名称空间下所有pod的详细信息</strong></p> <pre><code>kubectl get pod -n dev -owide --show-labels</code></pre> <p>结果截图如下</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/17a4d65116012c49c01a140c0783b88e.jpg" alt="k8s入门之pod"></p> <p>NODE：表示该pod被调度了哪个worker节点上</p> <p>IP：k8s会为每个pod分配一个ip，集群中的任意一个机器以及任意的应用都能通过此ip来访问这个Pod</p> <p>在master节点上可以通过curl ip访问pod</p> <pre><code># 默认是80端口，所以访问的是pod中的nginx容器 curl 10.244.218.1</code></pre> <p><strong>4.根据标签检索pod</strong></p> <pre><code>kubectl get pod -n dev -owide --show-labels -l app=nginx</code></pre> <p><strong>5.查看pod的描述信息</strong></p> <pre><code>kubectl describe pod mynginx -n dev</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/790549abc03fde4ad93e5387f8fbaebb.jpg" alt="k8s入门之pod"></p> <p>其中Events事件可以查看到pod被创建的详细过程</p> <p><strong>6.查看Pod的运行日志</strong></p> <pre><code>kubectl logs mynginx -n dev</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/2ea4fbeb2fe4ded9260a6a11bfa8564b.jpg" alt="k8s入门之pod"></p> <p><strong>7.进入pod容器</strong></p> <pre><code>kubectl exec -it mynginx /bin/bash -n dev</code></pre> <p>更改nginx容器的index.html内容</p> <pre><code>echo "hello,pod" &gt;&gt; /usr/share/nginx/html/index.html</code></pre> <p>再次访问mynginx</p> <pre><code>curl 10.244.218.1</code></pre> <p>可以看到index.html首页内容已经发生了变化</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/84e7e3ff25be126fc11bb661dfe5aa39.jpg" alt="k8s入门之pod"></p> <p><strong>8.监控pod状态命令</strong></p> <p>使用k8s的-w参数</p> <pre><code>kubect get pod -n dev -w</code></pre> <p>使用linux命令</p> <pre><code>watch -n 1 kubectl get pod -n dev</code></pre> <p><strong>9.删除pod</strong></p> <pre><code>kubectl delete pod mynginx -n dev</code></pre> <p><strong>二、使用yaml管理</strong></p> <p><strong>1.在pod里部署两个容器</strong></p> <p>一个pod里面不能部署相同镜像的容器，端口冲突</p> <p>（1）创建yaml文件</p> <pre><code>vi pod-nginx-tomcat.yaml</code></pre> <p>（2）编写pod文件内容，定义两个容器，一个为nginx，一个为tomcat</p> <pre><code>apiVersion: v1 kind: Pod metadata:   labels:     web: server   name: web-server   namespace: dev spec:   containers:   - image: nginx     name: nginx   - image: tomcat:9.0</code></pre> <p>（3）使用kubectl apply创建pod</p> <pre><code>kubectl apply -f pod-nginx-tomcat.yaml</code></pre> <p>（4）自动监控创建过程</p> <pre><code>kubectl get pod -n dev -w</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/13c77c3401b63b4fe7e9dbc8be954772.jpg" alt="k8s入门之pod"></p> <p><strong>2.查看pod描述</strong></p> <pre><code>kubectl describe pod web-server -n dev</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c56d9ca044b69c5ad16bc12d429ac215.jpg" alt="k8s入门之pod"></p> <p><strong>3.在节点上访问pod</strong></p> <p>（1）查看pod的ip</p> <pre><code>kubectl get pod -n dev -owide</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/9460954d38fe1a057c88f1025a75710a.jpg" alt="k8s入门之pod"></p> <p>（2）通过此ip访问pod中的nginx容器</p> <pre><code>curl 10.244.218.2</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/cc3c5a9561a3ac7e8c13481764c32dae.jpg" alt="k8s入门之pod"></p> <p>（3）通过此ip访问pod中的tomcat容器</p> <pre><code>curl 10.244.218.2:8080</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e05f9739b7d4d6259fb45b9b357f6c0c.jpg" alt="k8s入门之pod"></p> <p><strong>4.进入pod里面访问服务</strong></p> <p>（1）进入pod里面的nginx容器</p> <pre><code>kubectl exec web-server --container nginx -it /bin/bash -n dev</code></pre> <p>（2）在容器内，以下命令均可访问，证明了pod里网络共享</p> <pre><code>curl localhost curl localhost:8080 curl 10.244.218.2 curl 10.244.218.2:8080</code></pre> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-93861.htm">vue中自定义右键菜单插件_vue.js_</a></p>
+                                        <p>下一个：<a href="/news/article-94671.htm">宠物领养的英文单词（领养狗狗 英文）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-72706.htm" title="湖北宠物食品生产企业（宠物食品 公司）">湖北宠物食品生产企业（宠物食品 公司）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-18-latest-winxray-node.htm" title="「3月18日」最高速度19.1M/S，2025年WinXray每天更新免费节点订阅链接">「3月18日」最高速度19.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-91674.htm" title="无货源网店可信吗（无货源网店是真的吗?）">无货源网店可信吗（无货源网店是真的吗?）</a></li>
+                        <li class="py-2"><a href="/news/article-78091.htm" title="查看pytorch运行时真正调用的cuda版本">查看pytorch运行时真正调用的cuda版本</a></li>
+                        <li class="py-2"><a href="/news/article-84382.htm" title="流浪猫来预示着家里要死人了（流浪猫来预示着家里要死人了有依据吗）">流浪猫来预示着家里要死人了（流浪猫来预示着家里要死人了有依据吗）</a></li>
+                        <li class="py-2"><a href="/news/article-70072.htm" title="动物医院临床技术的英语翻译（动物医院临床技术的英语翻译是什么）">动物医院临床技术的英语翻译（动物医院临床技术的英语翻译是什么）</a></li>
+                        <li class="py-2"><a href="/news/article-66227.htm" title="动物疫苗的储存（动物疫苗的储存温度）">动物疫苗的储存（动物疫苗的储存温度）</a></li>
+                        <li class="py-2"><a href="/news/article-72707.htm" title="宠物美容师真实现状（宠物美容师真实现状）">宠物美容师真实现状（宠物美容师真实现状）</a></li>
+                        <li class="py-2"><a href="/news/article-90178.htm" title="广州宠物用品批发城电话（广州大型宠物用品店）">广州宠物用品批发城电话（广州大型宠物用品店）</a></li>
+                        <li class="py-2"><a href="/news/article-80875.htm" title="合肥宠物领养中心在哪里啊 合肥宠物领养中心在哪里啊多少钱">合肥宠物领养中心在哪里啊 合肥宠物领养中心在哪里啊多少钱</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
