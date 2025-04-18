@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-96905.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AES算法中填充模式的区别(PKCS7Padding/PKCS5Padding/ZeroPadding)</title>
+        <meta name="description" content="ZeroPadding，数据长度不对齐时使用0填充，否则不填充 PKCS7Padding，假设数据长度需要填充n(n&gt;0)个字节才对齐，那么填充n个字节，每个字节都是n;如果数据本身就已经对齐了" />
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-96905.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="AES算法中填充模式的区别(PKCS7Padding/PKCS5Padding/ZeroPadding)" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/bfe0e625ed76fb72c9cddbaf3d86b5ce.webp" />
+        <meta property="og:release_date" content="2025-04-16T08:37:19" />
+    <meta property="og:updated_time" content="2025-04-16T08:37:19" />
+        <meta property="og:description" content="ZeroPadding，数据长度不对齐时使用0填充，否则不填充 PKCS7Padding，假设数据长度需要填充n(n&gt;0)个字节才对齐，那么填充n个字节，每个字节都是n;如果数据本身就已经对齐了" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="AES算法中填充模式的区别(PKCS7Padding/PKCS5Padding/ZeroPadding)">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/">
+                        <span class="logo">Free WinXray</span>
+                        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>AES算法中填充模式的区别(PKCS7Padding/PKCS5Padding/ZeroPadding)</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <ul> <li>ZeroPadding，数据长度不对齐时使用0填充，否则不填充</li> <li>PKCS7Padding，假设数据长度需要填充n(n&gt;0)个字节才对齐，那么填充n个字节，每个字节都是n;如果数据本身就已经对齐了，则填充一块长度为块大小的数据，每个字节都是块大小</li> <li>PKCS5Padding，PKCS7Padding的子集，块大小固定为8字节。</li> </ul> <p><strong>两者的区别在于PKCS5Padding是限制块大小的PKCS7Padding.</strong></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-96904.htm">@DateTimeFormat 和 @JsonFormat 注解</a></p>
+                                        <p>下一个：<a href="/news/article-97627.htm">HTTPclient保持长连接</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-78799.htm" title="被猫抓伤多少天过危险期有什么症状（被猫抓伤多久度过危险期）">被猫抓伤多少天过危险期有什么症状（被猫抓伤多久度过危险期）</a></li>
+                        <li class="py-2"><a href="/news/article-86530.htm" title="快速掌握AsyncI-新手入门">快速掌握AsyncI-新手入门</a></li>
+                        <li class="py-2"><a href="/news/article-91441.htm" title="宠物粮进货渠道在哪里啊知乎（宠物粮进货平台）">宠物粮进货渠道在哪里啊知乎（宠物粮进货平台）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-25-free-winxray-node.htm" title="「3月25日」最高速度22.1M/S，2025年WinXray每天更新免费节点订阅链接">「3月25日」最高速度22.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-78091.htm" title="查看pytorch运行时真正调用的cuda版本">查看pytorch运行时真正调用的cuda版本</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-winxray-node-github.htm" title="「3月4日」最高速度20.5M/S，2025年WinXray每天更新免费节点订阅链接">「3月4日」最高速度20.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-92399.htm" title="python笔记 函数，参数，形参和实参，参数的传递">python笔记 函数，参数，形参和实参，参数的传递</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-9-winxray-github.htm" title="「4月9日」最高速度20.4M/S，2025年WinXray每天更新免费节点订阅链接">「4月9日」最高速度20.4M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-70071.htm" title="win11系统宽带连接错误651怎么办">win11系统宽带连接错误651怎么办</a></li>
+                        <li class="py-2"><a href="/news/article-68770.htm" title="龙泉驿区宠物医院24小时营业（龙泉驿区宠物医院24小时营业电话）">龙泉驿区宠物医院24小时营业（龙泉驿区宠物医院24小时营业电话）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">52</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
