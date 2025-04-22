@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://freewinxray.github.io/news/article-100628.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Golang错误处理机制（error 与 panic）</title>
+        <meta name="description" content="文章目录    一、概述 二、error 三、panic      一、概述 Go语言并没有像Java那样的try catch finally 的处理机制，而是提供了其特有的错误处理机制。在Go语言中" />
+        <link rel="icon" href="/assets/website/img/freewinxray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free WinXray节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://freewinxray.github.io/news/article-100628.htm" />
+    <meta property="og:site_name" content="Free WinXray节点订阅站" />
+    <meta property="og:title" content="Golang错误处理机制（error 与 panic）" />
+    <meta property="og:image" content="https://freewinxray.github.io/uploads/20240729/fcee7c6bfb3a3476568f502ff2d0b484.webp" />
+        <meta property="og:release_date" content="2025-04-21T06:49:38" />
+    <meta property="og:updated_time" content="2025-04-21T06:49:38" />
+        <meta property="og:description" content="文章目录    一、概述 二、error 三、panic      一、概述 Go语言并没有像Java那样的try catch finally 的处理机制，而是提供了其特有的错误处理机制。在Go语言中" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Golang错误处理机制（error 与 panic）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/freewinxray/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/freewinxray/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F73D4FMVSX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F73D4FMVSX');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/">
+                        <span class="logo">Free WinXray</span>
+                        </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+        </div>
+    </header><!-- End Header -->
+    <main id="main" data-aos="fade-up">
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>Golang错误处理机制（error 与 panic）</h1>
+                    <ol>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/news/">新闻资讯</a></li>
+                        <li>正文</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 xcblog-blog-list">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail">
+                      				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li> <ul> <li><a href="#_1" rel="nofollow">一、概述</a></li> <li><a href="#error_3" rel="nofollow">二、error</a></li> <li><a href="#panic_37" rel="nofollow">三、panic</a></li> </ul> </li> </ul> </div> <h2> <a id="_1" rel="nofollow"></a>一、概述</h2> <p>Go语言并没有像Java那样的<code>try catch finally</code> 的处理机制，而是提供了其特有的错误处理机制。在Go语言中，错误或异常分为error和panic两种，error一般是程序员可预知的，会进行合适的处理，例如检测输入是否合法等。而panic是程序员无法预知的异常，例如空指针或数组越界等。</p> <h2> <a id="error_3" rel="nofollow"></a>二、error</h2> <p>Go 提供了两种创建error的方法，分别是：<br /><code>errors.New</code><br /><code>fmt.Errorf</code></p> <pre><code class="prism language-go"><span class="token keyword">package</span> main  <span class="token keyword">import</span> <span class="token punctuation">(</span> 	<span class="token string">"errors"</span> 	<span class="token string">"fmt"</span> <span class="token punctuation">)</span>  <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	res1<span class="token punctuation">,</span> err1 <span class="token operator">:=</span> <span class="token function">div</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res1<span class="token punctuation">,</span> err1<span class="token punctuation">)</span>  	res2<span class="token punctuation">,</span> err2 <span class="token operator">:=</span> <span class="token function">div</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res2<span class="token punctuation">,</span> err2<span class="token punctuation">)</span> 	 	<span class="token comment">//返回一个error</span> 	e <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"自定义error"</span><span class="token punctuation">)</span> 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">}</span>  <span class="token keyword">func</span> <span class="token function">div</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> m <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">if</span> m <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{<!-- --></span> 		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">,</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">"0不能作为分母"</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span> 	<span class="token keyword">return</span> m <span class="token operator">/</span> n<span class="token punctuation">,</span> <span class="token boolean">nil</span> <span class="token punctuation">}</span> </code></pre> <p>运行结果如下<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/05b104b63438ed04be101a8c6c8ef73b.jpg" alt="Golang错误处理机制（error 与 panic）"></p> <h2> <a id="panic_37" rel="nofollow"></a>三、panic</h2> <p>一般在没有recover的情况下panic会导致程序崩溃，panic，defer和recover经常同时出现，用于异常处理，下面是panic异常处理的示例。</p> <pre><code class="prism language-go"><span class="token keyword">package</span> main  <span class="token keyword">import</span> <span class="token string">"fmt"</span>  <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token comment">//注册捕获panic的函数,必须先注册，若在panic之后则无效</span> 	<span class="token keyword">defer</span> <span class="token function">doPanic</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	n <span class="token operator">:=</span> <span class="token number">0</span> 	res <span class="token operator">:=</span> <span class="token number">1</span> <span class="token operator">/</span> n 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token comment">//panic 之后的代码不会执行</span> <span class="token punctuation">}</span>  <span class="token comment">//当捕获到panic时触发此函数</span> <span class="token keyword">func</span> <span class="token function">doPanic</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"捕获到panic"</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <blockquote> <p>注意在Go语言中，recover只在defer调用的函数中有效，并且defer要在panic之前先注册，否则不能捕获异常。当panic被捕获到后，被注册的函数将获得程序控制权</p> </blockquote></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-99871.htm">python协程编程实例_Python异步IO编程之-asyncio协程应用例子</a></p>
+                                        <p>下一个：<a href="/news/article-100629.htm">动物疫苗的了解和认识作文（动物疫苗知识）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-79482.htm" title="免费领养狗狗正规网站平台（附近免费领养狗）">免费领养狗狗正规网站平台（附近免费领养狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-15-free-node-subscribe.htm" title="「4月15日」最高速度18.1M/S，2025年WinXray每天更新免费节点订阅链接">「4月15日」最高速度18.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-node-share-links.htm" title="「3月29日」最高速度19.6M/S，2025年WinXray每天更新免费节点订阅链接">「3月29日」最高速度19.6M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-76061.htm" title="为MySQL创建高性能索引_Mysql_">为MySQL创建高性能索引_Mysql_</a></li>
+                        <li class="py-2"><a href="/news/article-79481.htm" title="动物接种疫苗后产生的免疫称为 动物接种疫苗后产生的免疫称为什么">动物接种疫苗后产生的免疫称为 动物接种疫苗后产生的免疫称为什么</a></li>
+                        <li class="py-2"><a href="/news/article-82971.htm" title="动物医院运营的工作内容 动物医院运营的工作内容是什么">动物医院运营的工作内容 动物医院运营的工作内容是什么</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-8-free-high-speed-nodes.htm" title="「4月8日」最高速度19.3M/S，2025年WinXray每天更新免费节点订阅链接">「4月8日」最高速度19.3M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-76729.htm" title="被猫抓伤怎样判断用不用打狂犬疫苗（被猫抓伤怎么确定有没有狂犬病）">被猫抓伤怎样判断用不用打狂犬疫苗（被猫抓伤怎么确定有没有狂犬病）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-free-node-subscribe.htm" title="「3月19日」最高速度20.9M/S，2025年WinXray每天更新免费节点订阅链接">「3月19日」最高速度20.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-8-free-winxray-node.htm" title="「3月8日」最高速度20.3M/S，2025年WinXray每天更新免费节点订阅链接">「3月8日」最高速度20.3M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">62</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                Free WinXray节点订阅站 版权所有 Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/freewinxray/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/purecounter/purecounter.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/freewinxray/waypoints/noframework.waypoints.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/freewinxray/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
