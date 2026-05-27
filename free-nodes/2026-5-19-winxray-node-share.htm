@@ -364,29 +364,9 @@ A4：可能未安装TUN驱动或驱动权限不足。建议重新安装，并以
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekobox 如何分流多协议流量？</h5></div>
+    <div class="panel-heading"><h5>Trojan 协议是如何伪装流量的？</h5></div>
     <div class="panel-body">
-        Nekobox 可以同时管理 Shadowsocks、VMess、Trojan 等多协议节点，通过策略组将不同流量分配到指定节点，实现精准分流，提高网络效率和管理便利性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些优势？</h5></div>
-    <div class="panel-body">
-        多路复用允许多个请求共享同一 QUIC 连接，减少握手次数和延迟。高并发情况下可以提升吞吐量和稳定性，特别适合短连接频繁请求的应用，如游戏或即时通讯。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅失败如何处理？</h5></div>
-    <div class="panel-body">
-        首先确认订阅 URL 是否有效，并确保网络连接正常。可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组使用，确保稳定科学上网体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray QUIC 传输适合什么网络环境？</h5></div>
-    <div class="panel-body">
-        QUIC 基于 UDP 支持多路复用和零握手，降低延迟，提高吞吐量。适合高丢包、不稳定网络环境，可保证视频、游戏和即时通讯流量的稳定性和流畅体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的重写功能有什么用途？</h5></div>
-    <div class="panel-body">
-        Shadowrocket 的重写功能允许用户在请求阶段修改 HTTP 头、响应内容或重定向 URL。这一功能常用于屏蔽广告、解锁区域限制或调试网页请求，非常灵活强大。<hr />    </div>
+        Trojan 利用 HTTPS 协议进行传输伪装，通过 TLS 加密实现高度隐蔽性。它让代理流量看起来与普通网站访问完全相同，从而难以被防火墙检测，是目前安全性较高的代理方案之一。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Hysteria2 的拥塞控制算法是什么？</h5></div>
@@ -394,14 +374,24 @@ A4：可能未安装TUN驱动或驱动权限不足。建议重新安装，并以
         Hysteria2 基于 QUIC 协议，采用 BBR 拥塞控制算法。相比传统 TCP 机制，BBR 能更好地利用带宽资源，提高高延迟网络下的吞吐率和响应速度。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-body">
+        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅失败如何处理？</h5></div>
+    <div class="panel-body">
+        首先确认订阅 URL 是否有效，并确保网络连接正常。可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组使用，确保稳定科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些优势？</h5></div>
+    <div class="panel-body">
+        多路复用允许多个请求共享同一 QUIC 连接，减少握手次数和延迟。高并发情况下可以提升吞吐量和稳定性，特别适合短连接频繁请求的应用，如游戏或即时通讯。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 的加密方式推荐使用哪种？</h5></div>
     <div class="panel-body">
         SSR 支持多种加密方式，如 aes-256-cfb、chacha20、rc4-md5 等。建议优先选择 chacha20 系列算法，在移动设备上性能更佳，同时具有较强的安全性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan 协议是如何伪装流量的？</h5></div>
-    <div class="panel-body">
-        Trojan 利用 HTTPS 协议进行传输伪装，通过 TLS 加密实现高度隐蔽性。它让代理流量看起来与普通网站访问完全相同，从而难以被防火墙检测，是目前安全性较高的代理方案之一。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 中的 alterId 是什么，现在还有必要配置吗？</h5></div>
@@ -409,9 +399,19 @@ A4：可能未安装TUN驱动或驱动权限不足。建议重新安装，并以
         alterId 曾用于 VMess 的用户混淆机制以防止重放攻击，但在 V2Ray 新版本与 VLess 出现后，alterId 已不再推荐使用。现代配置多使用 UUID 或直接迁移至 VLess/XTLS 以获得更好性能与安全性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 的重写功能有什么用途？</h5></div>
     <div class="panel-body">
-        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。    </div>
+        Shadowrocket 的重写功能允许用户在请求阶段修改 HTTP 头、响应内容或重定向 URL。这一功能常用于屏蔽广告、解锁区域限制或调试网页请求，非常灵活强大。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray QUIC 传输适合什么网络环境？</h5></div>
+    <div class="panel-body">
+        QUIC 基于 UDP 支持多路复用和零握手，降低延迟，提高吞吐量。适合高丢包、不稳定网络环境，可保证视频、游戏和即时通讯流量的稳定性和流畅体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekobox 如何分流多协议流量？</h5></div>
+    <div class="panel-body">
+        Nekobox 可以同时管理 Shadowsocks、VMess、Trojan 等多协议节点，通过策略组将不同流量分配到指定节点，实现精准分流，提高网络效率和管理便利性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -440,16 +440,16 @@ A4：可能未安装TUN驱动或驱动权限不足。建议重新安装，并以
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-4-20-winxray-node-github.htm" title="「4月20日」最高速度19.9M/S，2025年WinXray每天更新免费节点订阅链接">「4月20日」最高速度19.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-16-node-share-links.htm" title="「5月16日」最高速度18.3M/S，2025年WinXray每天更新免费节点订阅链接">「5月16日」最高速度18.3M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-29-free-winxray-node.htm" title="「4月29日」最高速度21.6M/S，2025年WinXray每天更新免费节点订阅链接">「4月29日」最高速度21.6M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-6-node-share-links.htm" title="「5月6日」最高速度18.6M/S，2025年WinXray每天更新免费节点订阅链接">「5月6日」最高速度18.6M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-8-winxray-github.htm" title="「5月8日」最高速度21M/S，2025年WinXray每天更新免费节点订阅链接">「5月8日」最高速度21M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-11-winxray-github.htm" title="「5月11日」最高速度19.5M/S，2025年WinXray每天更新免费节点订阅链接">「5月11日」最高速度19.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-5-12-today-winxray-node.htm" title="「5月12日」最高速度18.9M/S，2025年WinXray每天更新免费节点订阅链接">「5月12日」最高速度18.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-22-winxray-node.htm" title="「4月22日」最高速度22.5M/S，2025年WinXray每天更新免费节点订阅链接">「4月22日」最高速度22.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-24-free-winxray-node.htm" title="「5月24日」最高速度19.3M/S，2025年WinXray每天更新免费节点订阅链接">「5月24日」最高速度19.3M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-4-28-free-subscribe-node.htm" title="「4月28日」最高速度21.4M/S，2025年WinXray每天更新免费节点订阅链接">「4月28日」最高速度21.4M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-26-winxray-github.htm" title="「4月26日」最高速度18.3M/S，2025年WinXray每天更新免费节点订阅链接">「4月26日」最高速度18.3M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-12-today-winxray-node.htm" title="「5月12日」最高速度18.9M/S，2025年WinXray每天更新免费节点订阅链接">「5月12日」最高速度18.9M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-6-node-share-links.htm" title="「5月6日」最高速度18.6M/S，2025年WinXray每天更新免费节点订阅链接">「5月6日」最高速度18.6M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-27-winxray-windows.htm" title="「4月27日」最高速度20.7M/S，2025年WinXray每天更新免费节点订阅链接">「4月27日」最高速度20.7M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-17-node-share-links.htm" title="「4月17日」最高速度23M/S，2025年WinXray每天更新免费节点订阅链接">「4月17日」最高速度23M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-11-winxray-github.htm" title="「5月11日」最高速度19.5M/S，2025年WinXray每天更新免费节点订阅链接">「5月11日」最高速度19.5M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-22-free-winxray-node.htm" title="「5月22日」最高速度21.1M/S，2025年WinXray每天更新免费节点订阅链接">「5月22日」最高速度21.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-5-5-free-node-subscribe-links.htm" title="「5月5日」最高速度18M/S，2025年WinXray每天更新免费节点订阅链接">「5月5日」最高速度18M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-30-free-winxray-node.htm" title="「4月30日」最高速度20.1M/S，2025年WinXray每天更新免费节点订阅链接">「4月30日」最高速度20.1M/S，2025年WinXray每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -461,7 +461,7 @@ A4：可能未安装TUN驱动或驱动权限不足。建议重新安装，并以
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2026-05/" title="2026-05 归档">2026-05</a></h4>
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2026-05/" title="2026-05 归档">2026-05</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">19</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
